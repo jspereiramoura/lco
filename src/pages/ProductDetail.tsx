@@ -1,8 +1,10 @@
-export default function ProductDetail() {
+const ProductDetail = () => {
   return (
     <div>
       <h1>Product Detail Page</h1>
-      <p>This page will show the details of a specific product.</p>
+      <p>This is the product detail page content.</p>
     </div>
   );
-}
+};
+
+export default ProductDetail;
