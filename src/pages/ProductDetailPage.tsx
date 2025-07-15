@@ -2,12 +2,12 @@ import {
   Alert,
   Box,
   Card,
-  CardMedia,
   CircularProgress,
   Grid,
   Typography
 } from "@mui/material";
 import { useParams } from "react-router";
+import InfiniteImageCarousel from "../components/InfiniteCarousel";
 import Section from "../components/Section";
 import { useFetch } from "../hooks/useFetch";
 import { getProductById } from "../services/productService";
@@ -47,11 +47,12 @@ const ProductDetailPage = () => {
       <Card sx={{ mt: 2, p: 2 }}>
         <Grid container spacing={4}>
           <Grid size={{ xs: 12, md: 6 }}>
-            <CardMedia
-              component="img"
-              image={product.images[0]}
-              alt={product.title}
-              sx={{ width: "100%", height: "auto" }}
+            <InfiniteImageCarousel
+              items={product.images.map((image, index) => ({
+                id: index.toString(),
+                title: product.title,
+                content: image
+              }))}
             />
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
