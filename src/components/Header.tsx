@@ -1,14 +1,14 @@
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
   AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
   Badge,
   Box,
-  Container
+  Container,
+  IconButton,
+  Toolbar
 } from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router";
+import Logo from "../assets/Logo";
 import { useAppSelector } from "../hooks/redux";
 import { selectCartItemCount } from "../store/slices/cartSlice";
 
@@ -19,20 +19,16 @@ export default function Header() {
     <AppBar position="static">
       <Container maxWidth="lg">
         <Toolbar>
-          <Typography
-            variant="h6"
+          <Box
             to="/"
             component={Link}
             sx={{
-              flexGrow: 1,
-              textDecoration: "none",
-              color: "inherit",
-              "&:hover": { textDecoration: "underline" }
+              flexGrow: 1
             }}
+            aria-label="Go to Home"
           >
-            Challenge LOC Labs
-          </Typography>
-
+            <Logo />
+          </Box>
           <Box>
             <IconButton
               color="inherit"

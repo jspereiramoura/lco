@@ -37,7 +37,7 @@ describe("Header", () => {
   it("should render the header with correct title", () => {
     renderWithProviders();
 
-    const headerLink = screen.getByRole("link", { name: "Challenge LOC Labs" });
+    const headerLink = screen.getByRole("link", { name: "Go to Home" });
     expect(headerLink).toBeInTheDocument();
     expect(headerLink).toHaveAttribute("href", "/");
   });
