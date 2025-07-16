@@ -1,4 +1,4 @@
-import apiClient from "./apiClient";
+import apiClient from "./utils/apiClient";
 
 export const getCategories = async (): Promise<Category[]> => {
   const response = await apiClient.get("/categories");
