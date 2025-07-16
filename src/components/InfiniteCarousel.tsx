@@ -1,7 +1,7 @@
 import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import { Box, CardMedia, IconButton } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const InfiniteImageCarousel = ({
   items
@@ -18,9 +18,9 @@ const InfiniteImageCarousel = ({
     setIndex(prev => (prev - 1 + items.length) % items.length);
   };
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setIndex(prev => (prev + 1) % items.length);
-  };
+  }, [items.length]);
 
   useEffect(() => {
     const interval = setInterval(handleNext, 5000);
