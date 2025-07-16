@@ -25,7 +25,7 @@ const InfiniteImageCarousel = ({
   useEffect(() => {
     const interval = setInterval(handleNext, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [handleNext]);
 
   return (
     <Box position="relative" overflow="hidden" borderRadius={2}>

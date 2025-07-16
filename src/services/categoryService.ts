@@ -16,3 +16,14 @@ export const getProductsByCategory = async (
   const response = await apiClient.get(`/categories/${categoryId}/products`);
   return response.data;
 };
+
+export const getProductsByCategoryPaginated = async (
+  categoryId: string,
+  offset: number,
+  limit: number
+): Promise<Product[]> => {
+  const response = await apiClient.get(
+    `/categories/${categoryId}/products?offset=${offset}&limit=${limit}`
+  );
+  return response.data;
+};

@@ -1,7 +1,8 @@
 import {
   getCategories,
   getCategoryById,
-  getProductsByCategory
+  getProductsByCategory,
+  getProductsByCategoryPaginated
 } from "./categoryService";
 
 describe("Category Service", () => {
@@ -39,5 +40,28 @@ describe("Category Service", () => {
       creationAt: expect.any(String),
       updatedAt: expect.any(String)
     });
+  });
+
+  it("should fetch paginated products by category ID", async () => {
+    const products = await getProductsByCategoryPaginated("1", 0, 10);
+    expect(products).toBeDefined();
+    expect(products).toHaveLength(2);
+    expect(products[0]).toEqual({
+      id: 101,
+      title: "Camiseta básica",
+      slug: "camiseta-basica",
+      price: 59.9,
+      description: "Camiseta confortável e leve",
+      category: expect.any(Object),
+      images: ["https://example.com/produto1.jpg"],
+      creationAt: expect.any(String),
+      updatedAt: expect.any(String)
+    });
+  });
+
+  it("should fetch paginated products with correct offset and limit", async () => {
+    const products = await getProductsByCategoryPaginated("1", 5, 3);
+    expect(products).toBeDefined();
+    expect(products).toEqual(expect.any(Array));
   });
 });
