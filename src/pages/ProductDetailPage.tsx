@@ -7,6 +7,7 @@ import {
   Typography
 } from "@mui/material";
 import { useParams } from "react-router";
+import AddToCartButton from "./CartPage/components/AddToCartButton";
 import InfiniteImageCarousel from "../components/InfiniteCarousel";
 import Section from "../components/Section";
 import { useFetch } from "../hooks/useFetch";
@@ -62,10 +63,19 @@ const ProductDetailPage = () => {
             <Typography variant="h5" color="primary" gutterBottom>
               R$ {product.price.toFixed(2)}
             </Typography>
-            <Typography variant="body1">{product.description}</Typography>
-            <Typography variant="subtitle2" color="text.secondary">
+            <Typography variant="body1" sx={{ mb: 2 }}>
+              {product.description}
+            </Typography>
+            <Typography
+              variant="subtitle2"
+              color="text.secondary"
+              sx={{ mb: 2 }}
+            >
               Category: {product.category.name}
             </Typography>
+            <Box sx={{ mt: 2 }}>
+              <AddToCartButton product={product} size="large" fullWidth />
+            </Box>
           </Grid>
         </Grid>
       </Card>

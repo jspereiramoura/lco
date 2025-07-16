@@ -3,9 +3,25 @@ import { useFetch } from "../hooks/useFetch";
 import { render, screen } from "@testing-library/react";
 import ProductsByCategoryPage from "./ProductsByCategoryPage";
 import { useLocation, useNavigate, useParams } from "react-router";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import cartSlice from "../store/slices/cartSlice";
 
 vi.mock("../hooks/useFetch");
 vi.mock("react-router");
+
+const createMockStore = () => {
+  return configureStore({
+    reducer: {
+      cart: cartSlice
+    }
+  });
+};
+
+const renderWithProvider = (component: React.ReactElement) => {
+  const store = createMockStore();
+  return render(<Provider store={store}>{component}</Provider>);
+};
 
 describe("ProductsByCategory Page", () => {
   beforeEach(() => {
@@ -55,7 +71,7 @@ describe("ProductsByCategory Page", () => {
       loading: false,
       error: null
     });
-    render(<ProductsByCategoryPage />);
+    renderWithProvider(<ProductsByCategoryPage />);
 
     expect(screen.getByText("Product 1")).toBeInTheDocument();
     expect(screen.getByText("Product 2")).toBeInTheDocument();
@@ -77,7 +93,7 @@ describe("ProductsByCategory Page", () => {
     const navigateSpy = vi.fn();
     (useNavigate as Mock).mockReturnValue(navigateSpy);
 
-    render(<ProductsByCategoryPage />);
+    renderWithProvider(<ProductsByCategoryPage />);
 
     const productCard = screen.getByText("Product 1");
     productCard.click();

@@ -3,9 +3,25 @@ import ProductDetailPage from "./ProductDetailPage";
 import { render, screen } from "@testing-library/react";
 import { useParams } from "react-router";
 import { useFetch } from "../hooks/useFetch";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import cartSlice from "../store/slices/cartSlice";
 
 vi.mock("../hooks/useFetch");
 vi.mock("react-router");
+
+const createMockStore = () => {
+  return configureStore({
+    reducer: {
+      cart: cartSlice
+    }
+  });
+};
+
+const renderWithProvider = (component: React.ReactElement) => {
+  const store = createMockStore();
+  return render(<Provider store={store}>{component}</Provider>);
+};
 
 const mockProduct = {
   id: "1",
@@ -63,7 +79,7 @@ describe("ProductDetail Page", () => {
       error: null
     });
 
-    render(<ProductDetailPage />);
+    renderWithProvider(<ProductDetailPage />);
 
     expect(screen.getByText("Test Product")).toBeInTheDocument();
     expect(screen.getByText("This is a test product.")).toBeInTheDocument();
@@ -75,5 +91,6 @@ describe("ProductDetail Page", () => {
       "src",
       "image1.jpg"
     );
+    expect(screen.getByText("Buy")).toBeInTheDocument();
   });
 });

@@ -27,7 +27,6 @@ const CategoryPage = () => {
   if (loading) {
     return (
       <Box
-        minWidth="100vw"
         minHeight="100vh"
         display="flex"
         alignItems="center"

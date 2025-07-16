@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { Link, useLocation, useNavigate, useParams } from "react-router";
 import Section from "../components/Section";
+import AddToCartButton from "./CartPage/components/AddToCartButton";
 import { useFetch } from "../hooks/useFetch";
 import { getProductsByCategory } from "../services/categoryService";
 
@@ -97,15 +98,22 @@ const ProductsByCategoryPage = () => {
                 </CardContent>
               </CardActionArea>
               <Box p={2} sx={{ marginTop: "auto" }}>
-                <Button
-                  component={Link}
-                  to={`/products/${product.id}`}
-                  variant="contained"
-                  fullWidth
-                  onClick={() => handleProductClick(product.id)}
-                >
-                  View Details
-                </Button>
+                <Box display="flex" gap={1}>
+                  <Button
+                    component={Link}
+                    to={`/products/${product.id}`}
+                    variant="outlined"
+                    fullWidth
+                    onClick={() => handleProductClick(product.id)}
+                  >
+                    Details
+                  </Button>
+                  <AddToCartButton
+                    product={product}
+                    variant="contained"
+                    fullWidth
+                  />
+                </Box>
               </Box>
             </Card>
           </Grid>
