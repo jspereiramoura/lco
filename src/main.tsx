@@ -4,28 +4,31 @@ import "./index.css";
 import App from "./App.tsx";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { Provider } from "react-redux";
-import { store } from "./store/index.ts";
+import { persistor, store } from "./store/index.ts";
 import ProductDetailPage from "./pages/ProductDetailPage.tsx";
 import ProductsByCategoryPage from "./pages/ProductsByCategoryPage.tsx";
 import CategoryPage from "./pages/CategoryPage.tsx";
 import CartPage from "./pages/CartPage/CartPage";
+import { PersistGate } from "redux-persist/integration/react";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route index element={<CategoryPage />} />
-            <Route
-              path="categories/:id/products"
-              element={<ProductsByCategoryPage />}
-            />
-            <Route path="products/:id" element={<ProductDetailPage />} />
-            <Route path="cart" element={<CartPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <PersistGate persistor={persistor} loading={null}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />}>
+              <Route index element={<CategoryPage />} />
+              <Route
+                path="categories/:id/products"
+                element={<ProductsByCategoryPage />}
+              />
+              <Route path="products/:id" element={<ProductDetailPage />} />
+              <Route path="cart" element={<CartPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   </StrictMode>
 );

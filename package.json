@@ -34,7 +34,9 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",
-    "react-router": "^7.6.3"
+    "react-router": "^7.6.3",
+    "redux-persist": "^6.0.0",
+    "redux-persist-indexeddb-storage": "^1.0.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
