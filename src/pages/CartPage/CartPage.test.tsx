@@ -76,10 +76,10 @@ const renderWithProvider = (
 };
 
 describe("CartPage", () => {
-  it("should display empty cart message when cart is empty", () => {
+  it("should display empty cart message when cart is empty", async () => {
     renderWithProvider(<CartPage />);
 
-    expect(screen.getByText("Your cart is empty")).toBeInTheDocument();
+    expect(await screen.findByText("Your cart is empty")).toBeInTheDocument();
     expect(screen.getByText("Continue Shopping")).toBeInTheDocument();
   });
 
