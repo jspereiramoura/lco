@@ -1,16 +1,19 @@
-import { StrictMode } from "react";
+import { lazy, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { Provider } from "react-redux";
 import { persistor, store } from "./store/index.ts";
-import ProductDetailPage from "./pages/ProductDetailPage.tsx";
-import ProductsByCategoryPage from "./pages/ProductsByCategoryPage.tsx";
 import CategoryPage from "./pages/CategoryPage.tsx";
-import CartPage from "./pages/CartPage/CartPage";
-import NotFoundPage from "./pages/NotFoundPage.tsx";
 import { PersistGate } from "redux-persist/integration/react";
+
+const ProductDetailPage = lazy(() => import("./pages/ProductDetailPage.tsx"));
+const ProductsByCategoryPage = lazy(
+  () => import("./pages/ProductsByCategoryPage.tsx")
+);
+const CartPage = lazy(() => import("./pages/CartPage/CartPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage.tsx"));
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import { useSnackbar } from "notistack";
 import CartItems from "./components/CartItems";
 import CartSummary from "./components/CartSummary";
-import EmptyCart from "./components/EmptyCart";
 import Section from "../../components/Section";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import {
@@ -14,6 +13,9 @@ import {
   selectCartItems,
   selectCartTotal
 } from "../../store/slices/cartSlice";
+import { lazy } from "react";
+
+const EmptyCart = lazy(() => import("./components/EmptyCart"));
 
 export default function CartPage() {
   const dispatch = useAppDispatch();
