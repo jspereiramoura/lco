@@ -111,4 +111,22 @@ describe("Section Component", () => {
 
     expect(screen.queryByText("Previous Page")).toBeInTheDocument();
   });
+
+  it("should render the section description when provided", () => {
+    const title = "Section with Description";
+    const description = "This is a description for the section.";
+
+    render(<Section title={title} description={description} />, {
+      wrapper: MemoryRouter
+    });
+
+    const headingElement = screen.getByRole("heading", {
+      name: title,
+      level: 1
+    });
+    expect(headingElement).toBeInTheDocument();
+
+    const descriptionElement = screen.getByText(description);
+    expect(descriptionElement).toBeInTheDocument();
+  });
 });
