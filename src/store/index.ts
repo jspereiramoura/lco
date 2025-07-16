@@ -1,10 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./slices/cartSlice";
+import globalLoaderReducer from "./slices/globalLoaderSlice";
 
 export const store = configureStore({
-  reducer: {
-    cart: cartReducer
-  }
+  reducer: combineReducers({
+    cart: cartReducer,
+    globalLoader: globalLoaderReducer
+  }),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({ serializableCheck: false })
 });
 
 export type RootState = ReturnType<typeof store.getState>;

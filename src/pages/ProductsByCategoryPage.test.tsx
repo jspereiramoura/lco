@@ -1,11 +1,14 @@
-import { vi, type Mock } from "vitest";
-import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
-import { render, screen } from "@testing-library/react";
-import ProductsByCategoryPage from "./ProductsByCategoryPage";
-import { useLocation, useNavigate, useParams } from "react-router";
-import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
+import { render, screen } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { useLocation, useNavigate, useParams } from "react-router";
+import { vi, type Mock } from "vitest";
+import { GlobalLoader } from "../components/GlobalLoader/GlobalLoader";
+import { useAppSelector } from "../hooks/redux";
+import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
 import cartSlice from "../store/slices/cartSlice";
+import globalLoaderSlice from "../store/slices/globalLoaderSlice";
+import ProductsByCategoryPage from "./ProductsByCategoryPage";
 
 vi.mock("../hooks/useInfiniteScroll");
 vi.mock("../hooks/useAutoInfiniteScroll", () => ({
@@ -16,14 +19,30 @@ vi.mock("react-router");
 const createMockStore = () => {
   return configureStore({
     reducer: {
-      cart: cartSlice
+      cart: cartSlice,
+      globalLoader: globalLoaderSlice
     }
   });
 };
 
+const TestWrapper = ({ children }: { children: React.ReactNode }) => {
+  const { isLoading, message } = useAppSelector(state => state.globalLoader);
+
+  return (
+    <>
+      {children}
+      <GlobalLoader isVisible={isLoading} message={message} />
+    </>
+  );
+};
+
 const renderWithProvider = (component: React.ReactElement) => {
   const store = createMockStore();
-  return render(<Provider store={store}>{component}</Provider>);
+  return render(
+    <Provider store={store}>
+      <TestWrapper>{component}</TestWrapper>
+    </Provider>
+  );
 };
 
 describe("ProductsByCategory Page", () => {
@@ -55,8 +74,9 @@ describe("ProductsByCategory Page", () => {
       loadMore: vi.fn()
     });
 
-    render(<ProductsByCategoryPage />);
-    expect(await screen.findByRole("progressbar")).toBeInTheDocument();
+    renderWithProvider(<ProductsByCategoryPage />);
+
+    expect(await screen.findByText("Loading products...")).toBeInTheDocument();
   });
 
   it("should render error state", () => {
@@ -67,7 +87,7 @@ describe("ProductsByCategory Page", () => {
       hasMore: true,
       loadMore: vi.fn()
     });
-    render(<ProductsByCategoryPage />);
+    renderWithProvider(<ProductsByCategoryPage />);
     expect(screen.getByText(/Error fetching products/)).toBeInTheDocument();
   });
 

@@ -6,20 +6,23 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
-  CircularProgress,
   Grid,
   Typography
 } from "@mui/material";
+import { useEffect } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router";
-import Section from "../components/Section";
 import InfiniteScrollTrigger from "../components/InfiniteScrollTrigger";
-import AddToCartButton from "./CartPage/components/AddToCartButton";
-import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
+import Section from "../components/Section";
+import { useAppDispatch } from "../hooks/redux";
 import { useAutoInfiniteScroll } from "../hooks/useAutoInfiniteScroll";
+import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
 import { getProductsByCategoryPaginated } from "../services/categoryService";
+import { hideLoader, showLoader } from "../store/slices/globalLoaderSlice";
+import AddToCartButton from "./CartPage/components/AddToCartButton";
 
 const ProductsByCategoryPage = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { state } = useLocation();
   const { id: categoryId } = useParams<{ id: string }>();
 
@@ -39,6 +42,14 @@ const ProductsByCategoryPage = () => {
     onLoadMore: loadMore
   });
 
+  useEffect(() => {
+    if (loading && products.length === 0) {
+      dispatch(showLoader("Loading products..."));
+    } else {
+      dispatch(hideLoader());
+    }
+  }, [loading, products.length, dispatch]);
+
   const handleProductClick = (productId: number) => {
     navigate(`/products/${productId}`);
   };
@@ -48,7 +59,19 @@ const ProductsByCategoryPage = () => {
   }
 
   if (!products.length && !loading) {
-    return <Alert severity="warning">No products to display.</Alert>;
+    return (
+      <>
+        <Alert severity="warning">No products to display.</Alert>
+        <Button
+          variant="contained"
+          onClick={() => navigate("/")}
+          sx={{ mt: 4 }}
+          fullWidth
+        >
+          Go to Home
+        </Button>
+      </>
+    );
   }
 
   return (
@@ -59,17 +82,6 @@ const ProductsByCategoryPage = () => {
         state?.categoryName ? `${state?.categoryName} Store` : "Product List"
       }
     >
-      {loading && products.length === 0 && (
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          minHeight="200px"
-        >
-          <CircularProgress />
-        </Box>
-      )}
-
       <Grid container spacing={4}>
         {products.map((product: Product) => (
           <Grid key={product.id} size={{ xs: 12, sm: 6, md: 4 }}>

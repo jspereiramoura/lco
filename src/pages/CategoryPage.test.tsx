@@ -1,12 +1,43 @@
+import { configureStore } from "@reduxjs/toolkit";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { vi, type Mock } from "vitest";
-import { useFetch } from "../hooks/useFetch";
-import CategoryPage from "./CategoryPage";
+import { Provider } from "react-redux";
 import { useNavigate } from "react-router";
+import { vi, type Mock } from "vitest";
+import { GlobalLoader } from "../components/GlobalLoader/GlobalLoader";
+import { useAppSelector } from "../hooks/redux";
+import { useFetch } from "../hooks/useFetch";
+import cartSlice from "../store/slices/cartSlice";
+import globalLoaderSlice from "../store/slices/globalLoaderSlice";
+import CategoryPage from "./CategoryPage";
 
 vi.mock("react-router");
 vi.mock("../hooks/useFetch");
+
+const createMockStore = () => {
+  return configureStore({
+    reducer: {
+      cart: cartSlice,
+      globalLoader: globalLoaderSlice
+    }
+  });
+};
+
+const TestWrapper = ({ children }: { children: React.ReactNode }) => {
+  const { isLoading, message } = useAppSelector(state => state.globalLoader);
+
+  return (
+    <>
+      {children}
+      <GlobalLoader isVisible={isLoading} message={message} />
+    </>
+  );
+};
+
+const renderWithProvider = (component: React.ReactElement) => {
+  const store = createMockStore();
+  return render(<Provider store={store}>{component}</Provider>);
+};
 
 const mockedUseFetch = useFetch as Mock;
 
@@ -22,9 +53,13 @@ describe("Category Page", () => {
       error: null
     });
 
-    render(<CategoryPage />);
+    renderWithProvider(
+      <TestWrapper>
+        <CategoryPage />
+      </TestWrapper>
+    );
 
-    expect(screen.getByRole("progressbar")).toBeInTheDocument();
+    expect(screen.getByText("Loading categories...")).toBeInTheDocument();
   });
 
   it("should render an error message when fetching fails", () => {
@@ -35,7 +70,7 @@ describe("Category Page", () => {
       error: errorMessage
     });
 
-    render(<CategoryPage />);
+    renderWithProvider(<CategoryPage />);
 
     expect(screen.getByRole("alert")).toBeInTheDocument();
     expect(screen.getByText(errorMessage)).toBeInTheDocument();
@@ -56,7 +91,7 @@ describe("Category Page", () => {
       error: null
     });
 
-    render(<CategoryPage />);
+    renderWithProvider(<CategoryPage />);
 
     expect(screen.getByText("Category Page")).toBeInTheDocument();
     expect(screen.getByText("Electronics")).toBeInTheDocument();
@@ -86,7 +121,7 @@ describe("Category Page", () => {
     const navigateSpy = vi.fn();
     (useNavigate as Mock).mockReturnValue(navigateSpy);
 
-    render(<CategoryPage />);
+    renderWithProvider(<CategoryPage />);
 
     const categoryCard = screen.getByText("Electronics").closest("button");
     expect(categoryCard).toBeInTheDocument();

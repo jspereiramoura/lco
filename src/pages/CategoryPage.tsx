@@ -1,22 +1,32 @@
 import {
   Alert,
-  Box,
   Card,
   CardActionArea,
   CardContent,
   CardMedia,
-  CircularProgress,
   Grid,
   Typography
 } from "@mui/material";
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import Section from "../components/Section";
+import { useAppDispatch } from "../hooks/redux";
 import { useFetch } from "../hooks/useFetch";
 import { getCategories } from "../services/categoryService";
+import { hideLoader, showLoader } from "../store/slices/globalLoaderSlice";
 
 const CategoryPage = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { data: categories, loading, error } = useFetch(getCategories);
+
+  useEffect(() => {
+    if (loading) {
+      dispatch(showLoader("Loading categories..."));
+    } else {
+      dispatch(hideLoader());
+    }
+  }, [loading, dispatch]);
 
   const handleCategoryClick = (categoryId: number, categoryName: string) => {
     navigate(`/categories/${categoryId}/products`, {
@@ -25,16 +35,7 @@ const CategoryPage = () => {
   };
 
   if (loading) {
-    return (
-      <Box
-        minHeight="100vh"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <CircularProgress />
-      </Box>
-    );
+    return null;
   }
 
   if (error) {

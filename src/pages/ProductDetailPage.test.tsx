@@ -1,11 +1,14 @@
-import { vi, type Mock } from "vitest";
-import ProductDetailPage from "./ProductDetailPage";
-import { render, screen } from "@testing-library/react";
-import { useParams } from "react-router";
-import { useFetch } from "../hooks/useFetch";
-import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
+import { render, screen } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { useParams } from "react-router";
+import { vi, type Mock } from "vitest";
+import { GlobalLoader } from "../components/GlobalLoader/GlobalLoader";
+import { useAppSelector } from "../hooks/redux";
+import { useFetch } from "../hooks/useFetch";
 import cartSlice from "../store/slices/cartSlice";
+import globalLoaderSlice from "../store/slices/globalLoaderSlice";
+import ProductDetailPage from "./ProductDetailPage";
 
 vi.mock("../hooks/useFetch");
 vi.mock("react-router");
@@ -13,9 +16,21 @@ vi.mock("react-router");
 const createMockStore = () => {
   return configureStore({
     reducer: {
-      cart: cartSlice
+      cart: cartSlice,
+      globalLoader: globalLoaderSlice
     }
   });
+};
+
+const TestWrapper = ({ children }: { children: React.ReactNode }) => {
+  const { isLoading, message } = useAppSelector(state => state.globalLoader);
+
+  return (
+    <>
+      {children}
+      <GlobalLoader isVisible={isLoading} message={message} />
+    </>
+  );
 };
 
 const renderWithProvider = (component: React.ReactElement) => {
@@ -48,8 +63,12 @@ describe("ProductDetail Page", () => {
       loading: true,
       error: null
     });
-    render(<ProductDetailPage />);
-    expect(screen.getByRole("progressbar")).toBeInTheDocument();
+    renderWithProvider(
+      <TestWrapper>
+        <ProductDetailPage />
+      </TestWrapper>
+    );
+    expect(screen.getByText("Loading product details...")).toBeInTheDocument();
   });
 
   it("should render error state", () => {
@@ -58,7 +77,7 @@ describe("ProductDetail Page", () => {
       loading: false,
       error: "Error fetching product"
     });
-    render(<ProductDetailPage />);
+    renderWithProvider(<ProductDetailPage />);
     expect(screen.getByText("Error fetching product")).toBeInTheDocument();
   });
 
@@ -68,7 +87,7 @@ describe("ProductDetail Page", () => {
       loading: false,
       error: null
     });
-    render(<ProductDetailPage />);
+    renderWithProvider(<ProductDetailPage />);
     expect(screen.getByText("No product to display.")).toBeInTheDocument();
   });
 
