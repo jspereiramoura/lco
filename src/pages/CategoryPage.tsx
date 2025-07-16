@@ -18,6 +18,7 @@ import { hideLoader, showLoader } from "../store/slices/globalLoaderSlice";
 const CategoryPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const { data: categories, loading, error } = useFetch(getCategories);
 
   useEffect(() => {

@@ -9,6 +9,7 @@ import ProductDetailPage from "./pages/ProductDetailPage.tsx";
 import ProductsByCategoryPage from "./pages/ProductsByCategoryPage.tsx";
 import CategoryPage from "./pages/CategoryPage.tsx";
 import CartPage from "./pages/CartPage/CartPage";
+import NotFoundPage from "./pages/NotFoundPage.tsx";
 import { PersistGate } from "redux-persist/integration/react";
 
 createRoot(document.getElementById("root")!).render(
@@ -26,6 +27,7 @@ createRoot(document.getElementById("root")!).render(
               <Route path="products/:id" element={<ProductDetailPage />} />
               <Route path="cart" element={<CartPage />} />
             </Route>
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>
       </PersistGate>
