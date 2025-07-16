@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface InfiniteScrollResult<T> {
   data: T[];
@@ -19,21 +19,16 @@ export const useInfiniteScroll = <T>(
   const [offset, setOffset] = useState<number>(0);
   const initializedRef = useRef<boolean>(false);
 
-  const loadMore = async () => {
+  const loadMore = useCallback(async () => {
     if (loading || !hasMore) return;
 
     try {
       setLoading(true);
       const newItems = await fetchFunction(offset, itemsPerPage);
-      console.log(`Fetched ${newItems.length} items from offset ${offset}`);
 
       if (newItems.length < itemsPerPage) {
         setHasMore(false);
       }
-
-      console.log(`Current data length: ${data.length}`);
-      console.log(`New items length: ${newItems.length}`);
-      console.log(data, newItems);
 
       setData(prev => [...prev, ...newItems]);
       setOffset(prev => prev + itemsPerPage);
@@ -47,7 +42,7 @@ export const useInfiniteScroll = <T>(
     } finally {
       setLoading(false);
     }
-  };
+  }, [loading, hasMore, offset, itemsPerPage, fetchFunction]);
 
   useEffect(() => {
     if (!initializedRef.current) {
