@@ -1,0 +1,140 @@
+[
+  {
+    "name": "Clothes",
+    "image": "https://i.imgur.com/QkIa5tT.jpeg",
+    "products": [
+      {
+        "title": "Majestic Mountain Graphic T-Shirt",
+        "description": "Elevate your wardrobe with this stylish black t-shirt featuring a striking monochrome mountain range graphic. Perfect for those who love the outdoors or want to add a touch of nature-inspired design to their look, this tee is crafted from soft, breathable fabric ensuring all-day comfort. Ideal for casual outings or as a unique gift, this t-shirt is a versatile addition to any collection.",
+        "price": 44,
+        "images": [
+          "https://i.imgur.com/QkIa5tT.jpeg",
+          "https://i.imgur.com/jb5Yu0h.jpeg",
+          "https://i.imgur.com/UlxxXyG.jpeg"
+        ]
+      },
+      {
+        "title": "Classic Red Pullover Hoodie",
+        "description": "Elevate your casual wardrobe with our Classic Red Pullover Hoodie. Crafted with a soft cotton blend for ultimate comfort, this vibrant red hoodie features a kangaroo pocket, adjustable drawstring hood, and ribbed cuffs for a snug fit. The timeless design ensures easy pairing with jeans or joggers for a relaxed yet stylish look, making it a versatile addition to your everyday attire.",
+        "price": 10,
+        "images": [
+          "https://i.imgur.com/1twoaDy.jpeg",
+          "https://i.imgur.com/FDwQgLy.jpeg",
+          "https://i.imgur.com/kg1ZhhH.jpeg"
+        ]
+      },
+      {
+        "title": "Classic Heather Gray Hoodie",
+        "description": "Stay cozy and stylish with our Classic Heather Gray Hoodie. Crafted from soft, durable fabric, it features a kangaroo pocket, adjustable drawstring hood, and ribbed cuffs. Perfect for a casual day out or a relaxing evening in, this hoodie is a versatile addition to any wardrobe.",
+        "price": 69,
+        "images": [
+          "https://i.imgur.com/cHddUCu.jpeg",
+          "https://i.imgur.com/CFOjAgK.jpeg",
+          "https://i.imgur.com/wbIMMme.jpeg"
+        ]
+      },
+      {
+        "title": "Classic Grey Hooded Sweatshirt",
+        "description": "Elevate your casual wear with our Classic Grey Hooded Sweatshirt. Made from a soft cotton blend, this hoodie features a front kangaroo pocket, an adjustable drawstring hood, and ribbed cuffs for a snug fit. Perfect for those chilly evenings or lazy weekends, it pairs effortlessly with your favorite jeans or joggers.",
+        "price": 90,
+        "images": [
+          "https://i.imgur.com/R2PN9Wq.jpeg",
+          "https://i.imgur.com/IvxMPFr.jpeg",
+          "https://i.imgur.com/7eW9nXP.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Electronics",
+    "image": "https://i.imgur.com/ZANVnHE.jpeg",
+    "products": [
+      {
+        "title": "Sleek Comfort-Fit Over-Ear Headphones",
+        "description": "Experience superior sound quality with our Sleek Comfort-Fit Over-Ear Headphones, designed for prolonged use with cushioned ear cups and an adjustable, padded headband. Ideal for immersive listening, whether you're at home, in the office, or on the move. Their durable construction and timeless design provide both aesthetically pleasing looks and long-lasting performance.",
+        "price": 28,
+        "images": [
+          "https://i.imgur.com/SolkFEB.jpeg",
+          "https://i.imgur.com/KIGW49u.jpeg",
+          "https://i.imgur.com/mWwek7p.jpeg"
+        ]
+      },
+      {
+        "title": "Efficient 2-Slice Toaster",
+        "description": "Enhance your morning routine with our sleek 2-slice toaster, featuring adjustable browning controls and a removable crumb tray for easy cleaning. This compact and stylish appliance is perfect for any kitchen, ensuring your toast is always golden brown and delicious.",
+        "price": 48,
+        "images": [
+          "https://i.imgur.com/keVCVIa.jpeg",
+          "https://i.imgur.com/afHY7v2.jpeg",
+          "https://i.imgur.com/yAOihUe.jpeg"
+        ]
+      },
+      {
+        "title": "Sleek Wireless Computer Mouse",
+        "description": "Experience smooth and precise navigation with this modern wireless mouse, featuring a glossy finish and a comfortable ergonomic design. Its responsive tracking and easy-to-use interface make it the perfect accessory for any desktop or laptop setup. The stylish blue hue adds a splash of color to your workspace, while its compact size ensures it fits neatly in your bag for on-the-go productivity.",
+        "price": 10,
+        "images": [
+          "https://i.imgur.com/w3Y8NwQ.jpeg",
+          "https://i.imgur.com/WJFOGIC.jpeg",
+          "https://i.imgur.com/dV4Nklf.jpeg"
+        ]
+      },
+      {
+        "title": "Sleek Modern Laptop with Ambient Lighting",
+        "description": "Experience next-level computing with our ultra-slim laptop, featuring a stunning display illuminated by ambient lighting. This high-performance machine is perfect for both work and play, delivering powerful processing in a sleek, portable design. The vibrant colors add a touch of personality to your tech collection, making it as stylish as it is functional.",
+        "price": 43,
+        "images": [
+          "https://i.imgur.com/OKn1KFI.jpeg",
+          "https://i.imgur.com/G4f21Ai.jpeg",
+          "https://i.imgur.com/Z9oKRVJ.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Furniture",
+    "image": "https://i.imgur.com/Qphac99.jpeg",
+    "products": [
+      {
+        "title": "Sleek Modern Leather Sofa",
+        "description": "Enhance the elegance of your living space with our Sleek Modern Leather Sofa. Designed with a minimalist aesthetic, it features clean lines and a luxurious leather finish. The robust metal legs provide stability and support, while the plush cushions ensure comfort. Perfect for contemporary homes or office waiting areas, this sofa is a statement piece that combines style with practicality.",
+        "price": 53,
+        "images": [
+          "https://i.imgur.com/Qphac99.jpeg",
+          "https://i.imgur.com/dJjpEgG.jpeg",
+          "https://i.imgur.com/MxJyADq.jpeg"
+        ]
+      },
+      {
+        "title": "Mid-Century Modern Wooden Dining Table",
+        "description": "Elevate your dining room with this sleek Mid-Century Modern dining table, featuring an elegant walnut finish and tapered legs for a timeless aesthetic. Its sturdy wood construction and minimalist design make it a versatile piece that fits with a variety of decor styles. Perfect for intimate dinners or as a stylish spot for your morning coffee.",
+        "price": 24,
+        "images": [
+          "https://i.imgur.com/DMQHGA0.jpeg",
+          "https://i.imgur.com/qrs9QBg.jpeg",
+          "https://i.imgur.com/XVp8T1I.jpeg"
+        ]
+      },
+      {
+        "title": "Elegant Golden-Base Stone Top Dining Table",
+        "description": "Elevate your dining space with this luxurious table, featuring a sturdy golden metal base with an intricate rod design that provides both stability and chic elegance. The smooth stone top in a sleek round shape offers a robust surface for your dining pleasure. Perfect for both everyday meals and special occasions, this table easily complements any modern or glam decor.",
+        "price": 66,
+        "images": [
+          "https://i.imgur.com/NWIJKUj.jpeg",
+          "https://i.imgur.com/Jn1YSLk.jpeg",
+          "https://i.imgur.com/VNZRvx5.jpeg"
+        ]
+      },
+      {
+        "title": "Modern Elegance Teal Armchair",
+        "description": "Elevate your living space with this beautifully crafted armchair, featuring a sleek wooden frame that complements its vibrant teal upholstery. Ideal for adding a pop of color and contemporary style to any room, this chair provides both superb comfort and sophisticated design. Perfect for reading, relaxing, or creating a cozy conversation nook.",
+        "price": 25,
+        "images": [
+          "https://i.imgur.com/6wkyyIN.jpeg",
+          "https://i.imgur.com/Ald3Rec.jpeg",
+          "https://i.imgur.com/dIqo03c.jpeg"
+        ]
+      }
+    ]
+  }
+]

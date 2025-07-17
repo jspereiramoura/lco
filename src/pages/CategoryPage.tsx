@@ -14,6 +14,7 @@ import { useAppDispatch } from "../hooks/redux";
 import { useFetch } from "../hooks/useFetch";
 import { getCategories } from "../services/categoryService";
 import { hideLoader, showLoader } from "../store/slices/globalLoaderSlice";
+import ResetApiAlert from "../components/ResetApiAlert";
 
 const CategoryPage = () => {
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ const CategoryPage = () => {
 
   return (
     <Section title="Category Page" mustShowBackButton={false}>
+      <ResetApiAlert />
       <Grid container spacing={2}>
         {categories!.map(category => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={category.id}>

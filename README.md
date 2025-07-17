@@ -46,7 +46,10 @@ E como API estou utilizando a [Platzi](https://fakeapi.platzi.com/)
 #### Observação
 
 - Em um projeto real provavelmente seria utilizado o RTK Query para lidar com as requisições a API, devido a sua robustez, já que possuímos o Redux-Toolkit instalado neste projeto. Porém com a finalidade de demonstrar conhecimento em criação de hooks customizados para o React e soluções alternativas de cacheamento utilizei esta abordagem.
-- Por se tratar de uma API pública pode ser que algumas imagens ou descrição estejam com problema, devido a testes de outros desenvolvedores.
+- Por se tratar de uma API pública pode ser que algumas imagens ou descrição estejam com problema, devido a testes de outros desenvolvedores. Para resolver este problema, adicionei um botão na tela de listagem de categoria que irá:
+  - Remover as categorias vazias
+  - Criar 3 categorias com 4 produtos cada
+  - Fazer o reload da página
 
 ---
 
